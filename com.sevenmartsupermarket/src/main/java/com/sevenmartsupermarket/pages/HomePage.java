@@ -1,0 +1,32 @@
+package com.sevenmartsupermarket.pages;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+
+public class HomePage {
+	WebDriver driver;
+	
+	@FindBy(xpath ="//a[@class='d-block']" )
+	WebElement userProfileElement;
+	@FindBy(xpath ="(//a[@class='nav-link'])[2]")
+	private WebElement userLogoBtn;
+	@FindBy(xpath ="(//a[@class='dropdown-item'])[2]")
+	private WebElement logOut;
+	
+	public HomePage(WebDriver driver) {
+		this.driver = driver;
+		PageFactory.initElements(driver, this);
+	}
+	
+	public String getProfileName() {
+		return userProfileElement.getText();
+	}
+	public void logOut() {
+		userLogoBtn.click();
+		logOut.click();
+		
+				
+	}
+}
