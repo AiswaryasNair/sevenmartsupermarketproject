@@ -56,9 +56,4 @@ public class PageUtility {
 			return true;
 		}
 	}
-	
-	public void clickNewBtn() {
-		
-		
-	}
 }
