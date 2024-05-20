@@ -39,13 +39,13 @@ public class PushNotificationsTest extends Base {
 		excelreader.setExcelFile("pushNotificationData","Notifications");//workbooknmae,sheetname
 		String title= excelreader.getCellData(1, 0);//cell value
 		String description= excelreader.getCellData(1, 1);
+		description=description+GeneralUtility.getRandomFirstName();//avoid duplication
 		pushnotificationspage.sendNotification(title, description);
 		String actualAlertmsg=pushnotificationspage.verifyAlertMsgs();
 		String ExpectedAlertmsg="Message send successfully";
 		Assert.assertTrue(actualAlertmsg.contains(ExpectedAlertmsg));
 		}
 	@Test
-
 	public void verifyReset() {
 		loginpage = new LoginPage(driver);
 		homepage = new HomePage(driver);

@@ -1,5 +1,4 @@
 package com.sevenmartsupermarket.utilities;
-
 import java.io.File;
 import java.io.FileInputStream;
 
@@ -11,7 +10,6 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import com.sevenmartsupermarket.constants.Constants;
 
 public class ExcelReader {
-
 	XSSFSheet sheet;
 	XSSFWorkbook workbook;
 
@@ -26,7 +24,6 @@ public class ExcelReader {
 			FileInputStream fi = new FileInputStream(src);
 			workbook = new XSSFWorkbook(fi);
 			sheet = workbook.getSheet(sheetName);
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -52,4 +49,6 @@ public class ExcelReader {
 		}
 
 	}
+
+
 }

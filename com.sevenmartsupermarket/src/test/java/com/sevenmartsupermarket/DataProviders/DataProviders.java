@@ -1,4 +1,4 @@
-package com.sevenmartsupermarket.tests;
+package com.sevenmartsupermarket.DataProviders;
 
 import org.testng.annotations.DataProvider;
 

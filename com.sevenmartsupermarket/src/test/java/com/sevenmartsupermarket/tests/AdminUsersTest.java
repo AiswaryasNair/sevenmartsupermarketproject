@@ -4,6 +4,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
+import com.sevenmartsupermarket.DataProviders.DataProviders;
 import com.sevenmartsupermarket.base.Base;
 import com.sevenmartsupermarket.pages.AdminUsersPage;
 import com.sevenmartsupermarket.pages.HomePage;
@@ -16,21 +17,16 @@ public class AdminUsersTest extends Base {
 	HomePage homepage;
 	AdminUsersPage adminuserspage;
 	PageUtility pageutility;
-	SoftAssert softassert = new SoftAssert();
+	//SoftAssert softassert = new SoftAssert();
 
 	@Test(dataProvider = "usertypelist", dataProviderClass = DataProviders.class)
 	public void selectadminUsers(String passWord, String userTypes) {
 		loginpage = new LoginPage(driver);
-		homepage = new HomePage(driver);
 		loginpage.login();
 		adminuserspage = new AdminUsersPage(driver);
 		adminuserspage.getAdminUser();
-		adminuserspage.clickBtnNew();
 		String userName = GeneralUtility.getRandomFullName();
-		adminuserspage.enterUserName(userName);
-		adminuserspage.enterPassWord(passWord);
-		adminuserspage.selectUserType(userTypes);
-		adminuserspage.save();
+		adminuserspage.createNewUser(userName, passWord, userTypes);
 		String actualCreationalert = adminuserspage.verifyUserNameAlert();
 		String expectedCreationalert = "User Created Successfully";
 		Assert.assertTrue(actualCreationalert.contains(expectedCreationalert));
@@ -39,15 +35,10 @@ public class AdminUsersTest extends Base {
 	@Test(dataProvider = "existingusertypelist", dataProviderClass = DataProviders.class)
 	public void existingAdminUsers(String userName, String passWord, String userTypes) {
 		loginpage = new LoginPage(driver);
-		homepage = new HomePage(driver);
 		loginpage.login();
 		adminuserspage = new AdminUsersPage(driver);
 		adminuserspage.getAdminUser();
-		adminuserspage.clickBtnNew();
-		adminuserspage.enterUserName(userName);
-		adminuserspage.enterPassWord(passWord);
-		adminuserspage.selectUserType(userTypes);
-		adminuserspage.save();
+		adminuserspage.createNewUser(userName, passWord, userTypes);
 		String actualCreationalert = adminuserspage.verifyExistingUserNameAlert();
 		String expectedCreationalert = "Username already exists.";
 		Assert.assertTrue(actualCreationalert.contains(expectedCreationalert));
@@ -60,15 +51,12 @@ public class AdminUsersTest extends Base {
 		loginpage.login();
 		adminuserspage = new AdminUsersPage(driver);
 		adminuserspage.getAdminUser();
-		adminuserspage.clickBtnNew();
 		String userName = GeneralUtility.getRandomFullName();
-		adminuserspage.enterUserName(userName);
-		String password = GeneralUtility.getRandomFirstName();
-		adminuserspage.enterPassWord(password);
-		adminuserspage.selectUserType("staff");
-		adminuserspage.save();
+		String passWord = GeneralUtility.getRandomFirstName();
+		String userTypes="Staff";
+		adminuserspage.createNewUser(userName, passWord, userTypes);
 		homepage.logOut();
-		loginpage.login(userName, password);
+		loginpage.login(userName, passWord);
 		String actualProfileName=homepage.getProfileName();
 		String expectedProfileName=userName;
 		Assert.assertEquals(actualProfileName, expectedProfileName);
@@ -77,14 +65,10 @@ public class AdminUsersTest extends Base {
 	@Test( )
 	public void verifySerachUser() {
 		loginpage = new LoginPage(driver);
-		homepage = new HomePage(driver);
 		loginpage.login();
 		adminuserspage = new AdminUsersPage(driver);
 		adminuserspage.getAdminUser();
-		adminuserspage.clickSearchBtn();
-		adminuserspage.searchUserName("Aisw");
-		adminuserspage.searchUserTypes("staff");
-		adminuserspage.clickSerchUser();
+		adminuserspage.searchUser("Aisw", "staff");
 		String actualUserName=adminuserspage.verifyUserName();
 		String expectedUserNmae="Aisw";
 		Assert.assertEquals(actualUserName, expectedUserNmae);
@@ -93,52 +77,33 @@ public class AdminUsersTest extends Base {
 	@Test(dataProvider = "usertypelist", dataProviderClass = DataProviders.class)
 	public void verifyUserDeletion(String passWord, String userTypes) {
 		loginpage = new LoginPage(driver);
-		homepage = new HomePage(driver);
 		pageutility = new PageUtility(driver);
 		loginpage.login();
 		adminuserspage = new AdminUsersPage(driver);
 		adminuserspage.getAdminUser();
-		adminuserspage.clickBtnNew();
 		String userName = GeneralUtility.getRandomFullName();
-		adminuserspage.enterUserName(userName);
-		adminuserspage.enterPassWord(passWord);
-		adminuserspage.selectUserType(userTypes);
-		adminuserspage.save();
+		adminuserspage.createNewUser(userName, passWord, userTypes);
 		//search user
-		adminuserspage.clickSearchBtn();
-		adminuserspage.searchUserName(userName);
-		adminuserspage.searchUserTypes(userTypes);
-		adminuserspage.clickSerchUser();
+		adminuserspage.searchUser(userName,userTypes);
 		adminuserspage.deleteBtn();
 		pageutility.acceptalert();
 		//search user after deletion
-		adminuserspage.clickSearchBtn();
-		adminuserspage.searchUserName(userName);
-		adminuserspage.searchUserTypes(userTypes);
-		adminuserspage.clickSerchUser();
+		adminuserspage.searchUser(userName,userTypes);
 		String actualResult=adminuserspage.verifyDeletionOfUser();
 		String expectedResult=userName;
 		Assert.assertFalse(actualResult.contains(expectedResult));
 	}
+	
 	@Test(dataProvider = "usertypelist", dataProviderClass = DataProviders.class)
 	public void verifyUserUpdate(String passWord, String userTypes) {
 		loginpage = new LoginPage(driver);
-		homepage = new HomePage(driver);
-		pageutility = new PageUtility(driver);
 		loginpage.login();
 		adminuserspage = new AdminUsersPage(driver);
 		adminuserspage.getAdminUser();
-		adminuserspage.clickBtnNew();
 		String userName = GeneralUtility.getRandomFullName();
-		adminuserspage.enterUserName(userName);
-		adminuserspage.enterPassWord(passWord);
-		adminuserspage.selectUserType(userTypes);
-		adminuserspage.save();
+		adminuserspage.createNewUser(userName, passWord, userTypes);
 		//search
-		adminuserspage.clickSearchBtn();
-		adminuserspage.searchUserName(userName);
-		adminuserspage.searchUserTypes(userTypes);
-		adminuserspage.clickSerchUser();
+		adminuserspage.searchUser(userName,userTypes);
 		//update
 		adminuserspage.clickEditBtn();
 		adminuserspage.clear();
@@ -150,13 +115,27 @@ public class AdminUsersTest extends Base {
 		String expectedCreationalert = "User Updated Successfully";
 		Assert.assertTrue(actualCreationalert.contains(expectedCreationalert));
 		//verify username
-		adminuserspage.clickSearchBtn();
-		adminuserspage.searchUserName(updatedUserName);
-		adminuserspage.searchUserTypes("staff");
-		adminuserspage.clickSerchUser();
+		adminuserspage.searchUser(updatedUserName,userTypes);
 		String actualUserName=adminuserspage.verifyUserName();
 		String expectedUserNmae=updatedUserName;
 		Assert.assertEquals(actualUserName, expectedUserNmae);
 		
 	}	
+	@Test(dataProvider = "usertypelist", dataProviderClass = DataProviders.class)
+	public void verifyDeactivationFunctionality(String passWord, String userTypes) {
+		loginpage = new LoginPage(driver);
+		adminuserspage = new AdminUsersPage(driver);
+		loginpage.login();
+		adminuserspage.getAdminUser();
+		String userName = GeneralUtility.getRandomFullName();
+		adminuserspage.createNewUser(userName, passWord, userTypes);
+		adminuserspage.deactivateusers(userName);
+		adminuserspage.clickSearchBtn();
+		adminuserspage.searchUserName(userName);
+		adminuserspage.searchUserTypes("staff");
+		adminuserspage.clickSearchUser();
+		String actualStatus=adminuserspage.verifyInActiveStatus();
+		String expectedStatus="Inactive";
+		Assert.assertEquals(actualStatus, expectedStatus);
+	}
 }

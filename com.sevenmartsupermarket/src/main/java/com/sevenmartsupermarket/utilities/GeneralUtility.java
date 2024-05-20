@@ -14,7 +14,7 @@ public class GeneralUtility {
 		return element.getAttribute(attribute);
 
 	}
-
+//get informations like having return value is stored in general utility
 	public List<String> gettextOfeleemnts(List<WebElement> elements) {
 		List<String> data = new ArrayList<String>();
 		for (WebElement element : elements) {

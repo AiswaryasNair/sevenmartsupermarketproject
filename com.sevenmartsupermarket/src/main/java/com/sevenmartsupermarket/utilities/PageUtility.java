@@ -56,4 +56,7 @@ public class PageUtility {
 			return true;
 		}
 	}
+	public void backButton() {
+		driver.navigate().back();
+	}
 }
