@@ -108,7 +108,7 @@ public class AdminUsersPage {
 		return existingAlertText;
 	}
 
-	//search user
+	// search user
 	public void clickSearchBtn() {
 		searchBtn.click();
 	}
@@ -127,14 +127,15 @@ public class AdminUsersPage {
 	public void clickSearchUser() {
 		searchUserBtn.click();
 	}
-	
-	public void searchUser(String userName,String userTypes) {
+
+	public void searchUser(String userName, String userTypes) {
 		clickSearchBtn();
 		searchUserName(userName);
 		searchUserTypes(userTypes);
 		clickSearchUser();
 	}
-	//After search verify the user is displayed or not
+
+	// After search verify the user is displayed or not
 	public String verifyUserName() {
 		return getUserName.getText();
 	}
@@ -160,11 +161,6 @@ public class AdminUsersPage {
 	}
 
 	public void deactivateusers(String userName) {
-
-		/*
-		 * for(WebElement listUserNames : listAllUsers) {
-		 * System.out.println(listUserNames.getText());
-		 */
 		pageutility = new PageUtility(driver);
 		generalutility = new GeneralUtility();
 		List<String> namelist = new ArrayList<String>();
@@ -184,7 +180,14 @@ public class AdminUsersPage {
 	public String verifyInActiveStatus() {
 		return status.getText();
 	}
+
 	public void SelectDashboard() {
 		clickDashboard.click();
+	}
+
+	public void listNamesOfUser() {
+		for (WebElement listUserNames : listAllUsers) {
+			System.out.println(listUserNames.getText());
+		}
 	}
 }

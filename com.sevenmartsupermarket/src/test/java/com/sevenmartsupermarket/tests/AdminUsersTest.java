@@ -138,4 +138,26 @@ public class AdminUsersTest extends Base {
 		String expectedStatus="Inactive";
 		Assert.assertEquals(actualStatus, expectedStatus);
 	}
+	@Test
+	public void listUserName() {
+		loginpage = new LoginPage(driver);
+		adminuserspage = new AdminUsersPage(driver);
+		loginpage.login();
+		adminuserspage.getAdminUser();
+		adminuserspage.listNamesOfUser();
+	}
+	
+	//Read data from excel using dataprovider
+	@Test(dataProvider = "excelread", dataProviderClass = DataProviders.class)
+	public void excelData(String passWord, String userTypes) {
+		loginpage = new LoginPage(driver);
+		loginpage.login();
+		adminuserspage = new AdminUsersPage(driver);
+		adminuserspage.getAdminUser();
+		String userName = GeneralUtility.getRandomFullName();
+		adminuserspage.createNewUser(userName, passWord, userTypes);
+		String actualCreationalert = adminuserspage.verifyUserNameAlert();
+		String expectedCreationalert = "User Created Successfully";
+		Assert.assertTrue(actualCreationalert.contains(expectedCreationalert));
+	}
 }

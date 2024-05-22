@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="crosbrowzertest" thread-count="3" parallel="tests">
+	<test name="RunninginChrome">
+		<parameter name="browzer" value="chrome">
+
+		</parameter>
+		<classes>
+			<class name="com.sevenmartsupermarket.tests.LoginTest">
+			</class>
+		</classes>
+	</test>
+	<test name="RunninginEdge">
+		<parameter name="browzer" value="edge" />
+		<classes>
+			<class name="com.sevenmartsupermarket.tests.LoginTest">
+			</class>
+		</classes>
+	</test>
+
+	<test name="RunninginFirefox">
+		<parameter name="browzer" value="firefox" />
+		<classes>
+			<class name="com.sevenmartsupermarket.tests.LoginTest">
+			</class>
+		</classes>
+	</test>
+</suite>

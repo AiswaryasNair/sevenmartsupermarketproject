@@ -10,9 +10,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.testng.ITestResult;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Parameters;
 
 import com.sevenmartsupermarket.constants.Constants;
+import com.sevenmartsupermarket.utilities.ScreenshotCapture;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
@@ -20,7 +24,8 @@ public class Base {
 
 	public WebDriver driver;
 	Properties properties = new Properties();
-
+	ScreenshotCapture screenshotcapture=new ScreenshotCapture();
+	
 	/** Base Constructor **/
 	public Base() {
 		try {
@@ -49,14 +54,28 @@ public class Base {
 		driver.manage().deleteAllCookies();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(Constants.IMPLICIT_WAIT));
 	}
+	@Parameters("browzer")
+	@BeforeMethod(enabled = false)
 
-	@BeforeMethod
+	public void launchBrowser(String browzer) {
+
+		String url=properties.getProperty("url");
+		initialize(browzer,url);
+	}
+	@BeforeMethod(enabled = true)
 
 	public void launchBrowser() {
 
 		String browzer=properties.getProperty("browzer");
 		String url=properties.getProperty("url");
 		initialize(browzer,url);
+	}
+	@AfterMethod
+	public void terminateBrowzer(ITestResult itestresult) {
+		if(itestresult.getStatus()==ITestResult.FAILURE) {//listener itestresult
+		screenshotcapture.takescreenshot(driver,itestresult.getName());//get the current testcase name
+		}
+		
 	}
 
 }

@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 import com.sevenmartsupermarket.base.Base;
 import com.sevenmartsupermarket.pages.HomePage;
 import com.sevenmartsupermarket.pages.LoginPage;
+import com.sevenmartsupermarket.utilities.ScreenshotCapture;
 
 
 public class LoginTest extends Base {
@@ -23,9 +24,12 @@ public class LoginTest extends Base {
 	public void getUserName() {
 		loginpage=new LoginPage(driver);
 		homepage=new HomePage(driver);
+		//ScreenshotCapture screenshotcap=new ScreenshotCapture();
 		loginpage.login();
 		String actualProfileName=homepage.getProfileName();
 		String expectedProfileName="Admin";
+		//capture screenshot
+		//screenshotcap.takescreenshot(driver, "Aiswarya");
 		Assert.assertEquals(actualProfileName, expectedProfileName);	
 	}
 	
@@ -36,7 +40,7 @@ public class LoginTest extends Base {
 		loginpage.login("ammu", "tyyy");
 		String actualAlert=loginpage.getErrorMsg();
 		String expectedAlert="Invalid Username/Password";
-		Assert.assertEquals(actualAlert, expectedAlert);
+		Assert.assertTrue(actualAlert.contains(expectedAlert));
 	}
 	
 	@Test

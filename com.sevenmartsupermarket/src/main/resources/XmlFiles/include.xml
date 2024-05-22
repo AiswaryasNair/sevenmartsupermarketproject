@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="Parallel" thread-count="5" parallel="tests">
+	<listeners>
+		<listener  class-name="com.sevenmartsupermarket.listeners.ExtentReporter"></listener>
+	</listeners>
+	<test name="Loginpage">
+		<classes>
+			<class name="com.sevenmartsupermarket.tests.LoginTest">
+				<methods>
+					<include name="invalidLogin">
+
+					</include>
+
+				</methods>
+			</class>
+		</classes>
+	</test>
+	<test name="ManageLocation">
+		<classes>
+			<class name="com.sevenmartsupermarket.tests.ManageLocationTest">
+				<methods>
+					<exclude name="searchLocation">
+					</exclude>
+				</methods>
+			</class>
+		</classes>
+	</test>
+
+	<test name="UserCreation">
+		<classes>
+			<class name="com.sevenmartsupermarket.tests.AdminUsersTest">
+				<methods>
+					<include name="verifyDeactivationFunctionality">						
+					</include>
+				</methods>
+			</class>
+		</classes>
+	</test>
+</suite>
