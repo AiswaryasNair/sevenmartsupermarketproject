@@ -62,7 +62,7 @@ public class Base {
 		String url=properties.getProperty("url");
 		initialize(browzer,url);
 	}
-	@BeforeMethod(enabled = true)
+	@BeforeMethod(enabled = true,alwaysRun = true)
 
 	public void launchBrowser() {
 
@@ -70,7 +70,7 @@ public class Base {
 		String url=properties.getProperty("url");
 		initialize(browzer,url);
 	}
-	@AfterMethod
+	@AfterMethod(alwaysRun = true)
 	public void terminateBrowzer(ITestResult itestresult) {
 		if(itestresult.getStatus()==ITestResult.FAILURE) {//listener itestresult
 		screenshotcapture.takescreenshot(driver,itestresult.getName());//get the current testcase name

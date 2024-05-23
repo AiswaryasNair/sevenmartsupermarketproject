@@ -19,7 +19,7 @@ import com.relevantcodes.extentreports.LogStatus;
 import com.sevenmartsupermarket.constants.Constants;
 
 public class ExtentReporter implements IReporter {
-
+//IReporter - TestNG listener
 	private ExtentReports extent;
 
 	public void generateReport(List<XmlSuite> xmlSuites, List<ISuite> suites, String outputDirectory) {

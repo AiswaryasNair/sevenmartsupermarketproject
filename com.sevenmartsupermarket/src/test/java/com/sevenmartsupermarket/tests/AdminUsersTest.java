@@ -19,7 +19,7 @@ public class AdminUsersTest extends Base {
 	PageUtility pageutility;
 	//SoftAssert softassert = new SoftAssert();
 
-	@Test(dataProvider = "usertypelist", dataProviderClass = DataProviders.class)
+	@Test(dataProvider = "usertypelist", dataProviderClass = DataProviders.class,groups = "regression")
 	public void selectadminUsers(String passWord, String userTypes) {
 		loginpage = new LoginPage(driver);
 		loginpage.login();
@@ -32,7 +32,7 @@ public class AdminUsersTest extends Base {
 		Assert.assertTrue(actualCreationalert.contains(expectedCreationalert));
 	}
 
-	@Test(dataProvider = "existingusertypelist", dataProviderClass = DataProviders.class)
+	@Test(dataProvider = "existingusertypelist", dataProviderClass = DataProviders.class,groups={"regression","smoke"})
 	public void existingAdminUsers(String userName, String passWord, String userTypes) {
 		loginpage = new LoginPage(driver);
 		loginpage.login();

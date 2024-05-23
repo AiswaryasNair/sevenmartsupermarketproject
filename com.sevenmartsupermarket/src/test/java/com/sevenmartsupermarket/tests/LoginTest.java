@@ -12,14 +12,14 @@ import com.sevenmartsupermarket.utilities.ScreenshotCapture;
 public class LoginTest extends Base {
 	LoginPage loginpage;//Aggregation
 	HomePage homepage;
-	@Test
+	@Test(groups = "smoke")
 	public void verifyUserLogin() {
 		
 		loginpage=new LoginPage(driver);
 		loginpage.login();
 	}
 	
-	@Test
+	@Test(groups = "smoke",retryAnalyzer =com.sevenmartsupermarket.listeners.RetryAnalyzer.class)
 	
 	public void getUserName() {
 		loginpage=new LoginPage(driver);
