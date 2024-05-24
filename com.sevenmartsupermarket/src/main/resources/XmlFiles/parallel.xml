@@ -14,9 +14,9 @@
 	</test>
 	<test name="ManageLocation">
 		<classes>
-			<class name="com.sevenmartsupermarket.tests.ManageLocationTest">
+			<class name="com.sevenmartsupermarket.tests.LoginTest">
 				<methods>
-					<include name="createNewLocation"/>
+					<include name="invalidLogin"/>
 				</methods>
 			</class>
 		</classes>
