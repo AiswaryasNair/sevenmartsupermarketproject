@@ -6,12 +6,18 @@
 	<test name="Loginpage">
 		<classes>
 			<class name="com.sevenmartsupermarket.tests.LoginTest">
+				<methods>
+					<include name="getUserName"/>
+				</methods>
 			</class>
 		</classes>
 	</test>
 	<test name="ManageLocation">
 		<classes>
 			<class name="com.sevenmartsupermarket.tests.ManageLocationTest">
+				<methods>
+					<include name="createNewLocation"/>
+				</methods>
 			</class>
 		</classes>
 	</test>
@@ -19,6 +25,9 @@
 	<test name="UserCreation">
 		<classes>
 			<class name="com.sevenmartsupermarket.tests.AdminUsersTest">
+				<methods>
+					<include name="selectadminUsers"/>
+				</methods>
 			</class>
 		</classes>
 	</test>

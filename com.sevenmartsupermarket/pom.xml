@@ -16,7 +16,7 @@
           <version>3.2.5</version>
           <configuration>
 			  <suiteXmlFiles>
-				  <file>src/main/resources/XmlFiles/include.xml</file>
+				  <file>src/main/resources/XmlFiles/parallel.xml</file>
 			  </suiteXmlFiles>
 		  </configuration>
         </plugin>
