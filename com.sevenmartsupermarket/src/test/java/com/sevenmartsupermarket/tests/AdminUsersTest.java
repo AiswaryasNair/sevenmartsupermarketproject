@@ -18,7 +18,6 @@ public class AdminUsersTest extends Base {
 	AdminUsersPage adminuserspage;
 	PageUtility pageutility;
 	//SoftAssert softassert = new SoftAssert();
-	//
 	@Test(dataProvider = "usertypelist", dataProviderClass = DataProviders.class,groups = "regression")
 	public void selectadminUsers(String passWord, String userTypes) {
 		loginpage = new LoginPage(driver);
