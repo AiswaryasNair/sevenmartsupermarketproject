@@ -7,34 +7,24 @@ import com.sevenmartsupermarket.base.Base;
 import com.sevenmartsupermarket.pages.HomePage;
 import com.sevenmartsupermarket.pages.LoginPage;
 import com.sevenmartsupermarket.utilities.ScreenshotCapture;
+import com.sevenmartsupermarket.utilities.WaitUtility;
 
 
 public class LoginTest extends Base {
 	LoginPage loginpage;//Aggregation
 	HomePage homepage;
-	@Test(groups = "smoke")
-	public void verifyUserLogin() {
 		
-		loginpage=new LoginPage(driver);
-		loginpage.login();
-	}
-	
-	@Test(groups = "smoke",retryAnalyzer =com.sevenmartsupermarket.listeners.RetryAnalyzer.class)
-	
+	@Test(groups = "smoke",retryAnalyzer =com.sevenmartsupermarket.listeners.RetryAnalyzer.class)	
 	public void getUserName() {
 		loginpage=new LoginPage(driver);
 		homepage=new HomePage(driver);
-		//ScreenshotCapture screenshotcap=new ScreenshotCapture();
 		loginpage.login();
 		String actualProfileName=homepage.getProfileName();
 		String expectedProfileName="Admin";
-		//capture screenshot
-		//screenshotcap.takescreenshot(driver, "Aiswarya");
 		Assert.assertEquals(actualProfileName, expectedProfileName);	
 	}
 	
-	@Test
-	
+	@Test	
 	public void invalidLogin() {
 		loginpage=new LoginPage(driver);
 		loginpage.login("ammu", "tyyy");
@@ -44,17 +34,14 @@ public class LoginTest extends Base {
 	}
 	
 	@Test
-	public void clickRememberBtn() throws InterruptedException {
-		
+	public void clickRememberBtn() throws InterruptedException {		
 		loginpage=new LoginPage(driver);
 		loginpage.clickRememberButton();
-		//Assert.assertTrue(loginpage.verifyCheckBoxSelection());
-		loginpage.login();
+		Assert.assertTrue(loginpage.verifyCheckBoxSelection());
 	}
 	
 	@Test
-	public void verifyLogout() {
-		
+	public void verifyLogout() {		
 		loginpage=new LoginPage(driver);
 		homepage=new HomePage(driver);
 		loginpage.login();

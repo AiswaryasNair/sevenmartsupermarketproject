@@ -27,7 +27,6 @@ public class PushNotificationsTest extends Base {
 		pushnotificationspage.selectPushNotification();
 		pushnotificationspage.sendNotification("Test", "discription");
 		Assert.assertTrue(pushnotificationspage.verifyAlertMsg(), "Message is displayed");
-		System.out.println(GeneralUtility.getRandomFullName());//generate fullname
 	}
 	@Test
 	public void sendNotificationExcel() {
@@ -44,17 +43,5 @@ public class PushNotificationsTest extends Base {
 		String actualAlertmsg=pushnotificationspage.verifyAlertMsgs();
 		String ExpectedAlertmsg="Message send successfully";
 		Assert.assertTrue(actualAlertmsg.contains(ExpectedAlertmsg));
-		}
-	@Test
-	public void verifyReset() {
-		loginpage = new LoginPage(driver);
-		homepage = new HomePage(driver);
-		loginpage.login();
-		pushnotificationspage = new PushNotificationsPage(driver);
-		pushnotificationspage.selectPushNotification();
-		pushnotificationspage.sendNotification("Test", "");
-		pushnotificationspage.selectResetBtn();
-	}
-	
-	
+		}	
 }

@@ -36,6 +36,7 @@ public class LoginPage {
 	@FindBy(xpath ="//b[text()='7rmart supermarket']")
 	private WebElement title;
 	By homepagewaitElement=By.xpath("//a[@class='d-block']");
+	
 	//constructors
 	public LoginPage(WebDriver driver) {
 		this.driver = driver;

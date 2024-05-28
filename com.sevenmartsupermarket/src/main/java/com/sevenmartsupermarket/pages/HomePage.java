@@ -19,10 +19,16 @@ public class HomePage {
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
 	}
-	
+	/**\
+	 * get the profile name
+	 * @return
+	 */
 	public String getProfileName() {
 		return userProfileElement.getText();
 	}
+	/**\
+	 * logout the user
+	 */
 	public void logOut() {
 		userLogoBtn.click();
 		logOut.click();

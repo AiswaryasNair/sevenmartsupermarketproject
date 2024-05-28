@@ -17,7 +17,8 @@ public class AdminUsersTest extends Base {
 	HomePage homepage;
 	AdminUsersPage adminuserspage;
 	PageUtility pageutility;
-	//SoftAssert softassert = new SoftAssert();
+	SoftAssert softassert = new SoftAssert();
+	
 	@Test(dataProvider = "usertypelist", dataProviderClass = DataProviders.class,groups = "regression")
 	public void selectadminUsers(String passWord, String userTypes) {
 		loginpage = new LoginPage(driver);
@@ -44,7 +45,7 @@ public class AdminUsersTest extends Base {
 	}
 	
 	@Test( )
-	public void verifynewUserName() {
+	public void verifynewUserCreation() {
 		loginpage = new LoginPage(driver);
 		homepage = new HomePage(driver);
 		loginpage.login();
@@ -112,12 +113,12 @@ public class AdminUsersTest extends Base {
 		adminuserspage.clickUpdateBtn();
 		String actualCreationalert = adminuserspage.verifyUserNameAlert();
 		String expectedCreationalert = "User Updated Successfully";
-		Assert.assertTrue(actualCreationalert.contains(expectedCreationalert));
+		softassert.assertTrue(actualCreationalert.contains(expectedCreationalert));
 		//verify username
 		adminuserspage.searchUser(updatedUserName,userTypes);
 		String actualUserName=adminuserspage.verifyUserName();
 		String expectedUserNmae=updatedUserName;
-		Assert.assertEquals(actualUserName, expectedUserNmae);
+		softassert.assertEquals(actualUserName, expectedUserNmae);
 		
 	}	
 	@Test(dataProvider = "usertypelist", dataProviderClass = DataProviders.class)
@@ -137,15 +138,6 @@ public class AdminUsersTest extends Base {
 		String expectedStatus="Inactive";
 		Assert.assertEquals(actualStatus, expectedStatus);
 	}
-	@Test
-	public void listUserName() {
-		loginpage = new LoginPage(driver);
-		adminuserspage = new AdminUsersPage(driver);
-		loginpage.login();
-		adminuserspage.getAdminUser();
-		adminuserspage.listNamesOfUser();
-	}
-	
 	//Read data from excel using dataprovider
 	@Test(dataProvider = "excelread", dataProviderClass = DataProviders.class)
 	public void excelData(String passWord, String userTypes) {

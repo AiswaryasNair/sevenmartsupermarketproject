@@ -8,6 +8,7 @@ import com.sevenmartsupermarket.pages.ManageLocationPage;
 import com.sevenmartsupermarket.utilities.ExcelReader;
 import com.sevenmartsupermarket.utilities.GeneralUtility;
 import com.sevenmartsupermarket.utilities.PageUtility;
+import com.sevenmartsupermarket.utilities.WaitUtility;
 public class ManageLocationTest extends Base {
 
 	LoginPage loginpage;
@@ -15,11 +16,13 @@ public class ManageLocationTest extends Base {
 	AdminUsersPage adminuserspage;
 	ExcelReader excelreader=new ExcelReader();
 	PageUtility pageutility;
+	WaitUtility waitutility;
 	@Test
 	public void createNewLocation() {
 		loginpage = new LoginPage(driver);
 		managelocationpage = new ManageLocationPage(driver);
 		adminuserspage = new AdminUsersPage(driver);
+		waitutility = new WaitUtility(driver);
 		loginpage.login();
 		excelreader.setExcelFile("ManageLocationData","Locations");//workbooknmae,sheetname
 		String country= excelreader.getCellData(1, 0);//cell value
@@ -27,7 +30,6 @@ public class ManageLocationTest extends Base {
 		String location= excelreader.getCellData(1, 2);
 		String loc = location+GeneralUtility.getRandomFirstName();	
 		int charge = Integer.parseInt(excelreader.getCellData(1, 3));
-		//description=description+GeneralUtility.getRandomFirstName();//avoid duplication
 		managelocationpage.createNewLocation(country, state, loc,charge);
 		String actualCreationalert = adminuserspage.verifyUserNameAlert();
 		String expectedCreationalert = "Location Created Successfully";

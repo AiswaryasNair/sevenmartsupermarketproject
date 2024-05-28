@@ -39,7 +39,6 @@ public class AdminUsersPage {
 	private WebElement userNameSearch;
 	@FindBy(xpath = "(//select[@class='form-control'])[1]")
 	private WebElement userTypeSearch;
-
 	@FindBy(xpath = "//button[@name='Search']")
 	private WebElement searchUserBtn;
 	@FindBy(xpath = "//table//tbody//tr[1]//td[1]")
@@ -50,14 +49,12 @@ public class AdminUsersPage {
 	private WebElement editBtn;
 	@FindBy(xpath = "//button[@name='Update']")
 	private WebElement updateBtn;
-
 	@FindBy(xpath = "//tbody//tr//td[1]")
 	List<WebElement> listAllUsers;
 	@FindBy(xpath = "//span[@class='badge bg-warning']")
 	private WebElement status;
 	@FindBy(xpath = "//p[text()='Dashboard']")
 	private WebElement clickDashboard;
-
 	public AdminUsersPage(WebDriver driver) {
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
@@ -70,11 +67,17 @@ public class AdminUsersPage {
 	public void clickBtnNew() {
 		newBtn.click();
 	}
-
+	/*
+	 * 
+	 * @param username
+	 */
 	public void enterUserName(String username) {
 		userName.sendKeys(username);
 	}
-
+	/**\
+	 * 
+	 * @param password
+	 */
 	public void enterPassWord(String password) {
 		passWord.sendKeys(password);
 	}
@@ -82,11 +85,19 @@ public class AdminUsersPage {
 	public void save() {
 		saveBtn.click();
 	}
-
+	/**
+	 * 
+	 * @param userTypes
+	 */
 	public void selectUserType(String userTypes) {
 		userType.sendKeys(userTypes);
 	}
-
+	/**
+	 * Method to create new user
+	 * @param UserName
+	 * @param PassWord
+	 * @param userTypes
+	 */
 	public void createNewUser(String UserName, String PassWord, String userTypes) {
 		clickBtnNew();
 		enterUserName(UserName);
@@ -94,72 +105,107 @@ public class AdminUsersPage {
 		selectUserType(userTypes);
 		save();
 	}
-
-//New user creation alert
+	/**\
+	 * New user creation alert
+	 * @return
+	 */
 	public String verifyUserNameAlert() {
 
 		String AlertText = userCreationAlert.getText();
 		return AlertText;
 	}
-
+	/**\
+	 * Existing user alert
+	 * @return
+	 */
 	public String verifyExistingUserNameAlert() {
 
 		String existingAlertText = existingUserAlert.getText();
 		return existingAlertText;
 	}
-
-	// search user
+	/**\
+	 * search user
+	 */
 	public void clickSearchBtn() {
 		searchBtn.click();
 	}
-
+	/**\
+	 * Search user name
+	 * @param userSearch
+	 * @return
+	 */
 	public String searchUserName(String userSearch) {
 		userNameSearch.sendKeys(userSearch);
 		return userSearch;
 	}
-
+	/**\
+	 * Search usertypes
+	 * @param userTypeSearches
+	 * @return
+	 */
 	public String searchUserTypes(String userTypeSearches) {
 		userTypeSearch.sendKeys(userTypeSearches);
 		return userTypeSearches;
 	}
-
-	// enter user detailes and click search button
+	/**\
+	 * enter user detailes and click search button
+	 */ 
 	public void clickSearchUser() {
 		searchUserBtn.click();
 	}
-
+	/**\
+	 * 
+	 * @param userName
+	 * @param userTypes
+	 */
 	public void searchUser(String userName, String userTypes) {
 		clickSearchBtn();
 		searchUserName(userName);
 		searchUserTypes(userTypes);
 		clickSearchUser();
 	}
-
-	// After search verify the user is displayed or not
+	/**\
+	 *  After search verify the user is displayed or not
+	 * @return
+	 */
 	public String verifyUserName() {
 		return getUserName.getText();
 	}
-
+	/**\
+	 * Click on delete button
+	 */
 	public void deleteBtn() {
 		deletebtn.click();
 	}
-
+	/**\
+	 * verify the deletion of user
+	 * @return
+	 */
 	public String verifyDeletionOfUser() {
 		return getUserName.getText();
 	}
-
+	/**\
+	 * click on edit button
+	 */
 	public void clickEditBtn() {
 		editBtn.click();
 	}
-
+	/**\
+	 * click on update button
+	 */
 	public void clickUpdateBtn() {
 		updateBtn.click();
 	}
-
+	/**\
+	 * clear the field
+	 */
 	public void clear() {
 		userName.clear();
 	}
-
+	/**\
+	 * deactivate user
+	 * @param userName
+	 */
 	public void deactivateusers(String userName) {
 		pageutility = new PageUtility(driver);
 		generalutility = new GeneralUtility();
@@ -176,15 +222,22 @@ public class AdminUsersPage {
 		WebElement deactivateButton = driver.findElement(By.xpath("//table//tr[" + index + "]//td[5]//a[1]"));
 		pageutility.ScrollAndClick(deactivateButton);
 	}
-
+	/**\
+	 * verify user status
+	 * @return
+	 */
 	public String verifyInActiveStatus() {
 		return status.getText();
 	}
-
+	/**\
+	 * Click on dashboard
+	 */
 	public void SelectDashboard() {
 		clickDashboard.click();
 	}
-
+	/**\
+	 * list of usernames
+	 */
 	public void listNamesOfUser() {
 		for (WebElement listUserNames : listAllUsers) {
 			System.out.println(listUserNames.getText());
