@@ -26,11 +26,9 @@ public class LoginPage {
 	@FindBy(xpath ="//button[@class='btn btn-dark btn-block']" )
 	private WebElement login;
 	@FindBy(xpath ="//div[@class='alert alert-danger alert-dismissible']")
-	private WebElement alertmsg;
-	
+	private WebElement alertmsg;	
 	@FindBy(xpath ="//label[@for='remember']")
-	private WebElement rememberBtn;
-	
+	private WebElement rememberBtn;	
 	@FindBy(xpath ="//input[@id='remember']")
 	private WebElement selectrembtn;
 	@FindBy(xpath ="//b[text()='7rmart supermarket']")
